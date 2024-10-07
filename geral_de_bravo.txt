@@ -1,0 +1,30 @@
+#comandos importantes:
+
+npm init -y
+npm install typescript ts-node @types/node --save-dev
+npx tsc --init
+npm install prisma --save-dev
+
+
+npm install -D prisma@latest            => instalar prisma
+npm install @prisma/client@latest       => instalar prisma client
+npx prisma init                         => utilizado para inicializar o prisma (criando a estutura, pasta ./prima e arquivo schema.prisma)
+npx prisma migrate dev --name init      => executar migrate sempre que o modelo for alterado ./prisma/schema.prisma
+npx prisma generate --sql               => gerar o client prisma (schema e comandos sql da pasta ./prisma/sql cada vez que for criado uma nova consulta)
+npx ts-node index.ts                    => executar script
+
+
+
+prisma generate: gera o código de acesso ao banco de dados a partir do arquivo de modelo do Prisma.
+prisma introspect: examina o banco de dados e gera o arquivo de modelo do Prisma a partir dele.
+prisma migrate save: cria uma nova migração a partir do arquivo de modelo atual do Prisma.
+prisma migrate up: aplica as migrações pendentes ao banco de dados.
+prisma migrate down: reverte as últimas migrações aplicadas ao banco de dados.
+prisma reset: remove todos os dados do banco de dados e aplica novamente todas as migrações.
+prisma playground: inicia o playground do Prisma, um ambiente interativo para explorar e testar consultas.
+
+
+#criando uma api rest com TypeScript, Prisma e MySQL:
+
+https://medium.com/@alfiannrzky0/creating-a-rest-api-with-express-js-typescript-and-prisma-orm-35445481a19b
+https://dev.to/osalumense/validating-request-data-in-expressjs-using-zod-a-comprehensive-guide-3a0j
