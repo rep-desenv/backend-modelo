@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["typedSql"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int @id @default(autoincrement()) @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  colaborador       String @db.VarChar(255)
+  funcao            String? @db.VarChar(255)
+  admissao          DateTime?
+  jornada_trabalho  Float
+  entradaAt         DateTime @db.Time()
+  saidaAt           DateTime @db.Time()
+  hora_base         DateTime @db.Time()
+  valor_base        Float
+  dias_trab         Int
+  valor_dia         Float
+  valor_hora        Float
+  porcentagem       Float
+  fk_folhaPonto     Folha_Ponto_Mov[]
+  fk_folhaPonto2    Folha_Ponto_Fecham[]
+}
+
+model Calendario {
+  id          Int @id @default(autoincrement()) @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  mes         String @db.VarChar(50)  
+  data        DateTime @db.Date
+  dia         String
+  feriado     Boolean @default(false)  
+  fk_folhaPonto  Folha_Ponto_Mov[]  
+  fk_folhaPonto2  Folha_Ponto_Fecham[]  
+}
+
+model Folha_Ponto_Mov_Tipo {
+  id            Int @id @default(autoincrement()) @unique
+  createdAt     DateTime @default(now())
+  createdBy     Int
+  updatedAt     DateTime @updatedAt
+  updatedBy     Int 
+  tipo_desc     String
+  tipo_mov      Bytes
+  perfilId      Int 
+  perfil        Perfil @relation(fields: [perfilId], references: [id]) 
+}
+
+model Folha_Ponto_Mov {
+  id            Int @id @default(autoincrement()) @unique
+  createdAt     DateTime @default(now())
+  createdBy     Int
+  updatedAt     DateTime @updatedAt
+  updatedBy     Int  
+  userId        Int  
+  calendarioId  Int
+  hora_ini      DateTime @db.Time()
+  hora_fim      DateTime @db.Time()
+  user          User @relation(fields: [userId], references: [id])
+  calendario    Calendario @relation(fields: [calendarioId], references: [id])
+}
+
+model Folha_Ponto_Fecham {
+  id            Int @id @default(autoincrement()) @unique
+  createdAt     DateTime @default(now())
+  createdBy     Int
+  updatedAt     DateTime @updatedAt
+  updatedBy     Int  
+  userId        Int  
+  calendarioId  Int
+  hora_ini      DateTime @db.Time()
+  hora_fim      DateTime @db.Time()
+  user          User @relation(fields: [userId], references: [id])
+  calendario    Calendario @relation(fields: [calendarioId], references: [id])
+}
+
+model Perfil {
+  id            Int @id @default(autoincrement()) @unique
+  createdAt     DateTime @default(now())
+  createdBy     Int
+  updatedAt     DateTime @updatedAt
+  updatedBy     Int
+  perfil_desc   String 
+  fk_folha_ponto_mov_tipo Folha_Ponto_Mov_Tipo[]
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  name String
+  price Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("products")
+}
