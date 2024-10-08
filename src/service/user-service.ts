@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient, User } from "@prisma/client";
+import AppError from "../errors/app-error"
 
 const prisma = new PrismaClient()
 
@@ -16,7 +17,9 @@ export const getUser = async (userId: number): Promise<User | null> => {
 
 };
 
-export const createUser = async (dados: User) => {
+export const createUser = async (dados: User) => { 
+
+    await validaUserNome(dados.colaborador)
 
     const createUser = await prisma.user.create({
         data: {
@@ -76,5 +79,17 @@ export const updateUser = async (userId: number, dados:User) => {
     })
 
     return updateUser
+
+}
+
+const validaUserNome = async (name: string) => {
+
+    const nameUser = await prisma.user.findMany({
+        where: { colaborador: name },
+    });
+    
+    if(nameUser.length > 0){
+        throw new AppError("Usuário já cadastrado na base de dados.", 401);
+    }
 
 }

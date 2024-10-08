@@ -28,3 +28,22 @@ prisma playground: inicia o playground do Prisma, um ambiente interativo para ex
 
 https://medium.com/@alfiannrzky0/creating-a-rest-api-with-express-js-typescript-and-prisma-orm-35445481a19b
 https://dev.to/osalumense/validating-request-data-in-expressjs-using-zod-a-comprehensive-guide-3a0j
+https://blog.cubos.academy/typscript/#
+https://medium.com/@gabrielorlando_12302/desenvolvendo-uma-aplica%C3%A7%C3%A3o-simples-com-express-e-typescript-818ad9363a12
+
+
+#Tipos de dados para TypeScript:
+
+Number: Para representar números, sejam eles inteiros ou de ponto flutuante.
+String: Para representar sequências de caracteres.
+Boolean: Para representar valores true ou false.
+Null e undefined: Para representar valores nulos ou não definidos.
+Any: Para representar qualquer tipo de dado.
+Void: Para representar a ausência de um valor.
+Object: Para representar um tipo de objeto.
+Array: Para representar um array de valores de um determinado tipo.
+Tuple: Para representar uma matriz com um número fixo de elementos, em que cada elemento pode ter um tipo diferente.
+Enum: Para representar um conjunto de valores nomeados.
+Union Types: Para representar um tipo que pode ter um dos vários tipos possíveis.
+Intersection Types: Para representar um tipo que é a combinação de dois ou mais tipos diferentes.
+Type Aliases: Para criar um novo nome para um tipo existente.
