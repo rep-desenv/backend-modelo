@@ -47,6 +47,12 @@ export const createUser = async (dados: User) => {
 
 export const deleteUser = async(userId: number)=>{
 
+    const user = await getUser(userId)
+
+    if(!user){
+        throw new AppError("Usuário não encontrado na base de dados.", 401);
+    }
+
     const deleteUser = await prisma.user.delete({
         where: { id: userId}
     })
@@ -57,6 +63,12 @@ export const deleteUser = async(userId: number)=>{
 
 
 export const updateUser = async (userId: number, dados:User) => {
+
+    const user = await getUser(userId)
+
+    if(!user){
+        throw new AppError("Usuário não encontrado na base de dados.", 401);
+    }
 
     const updateUser = await prisma.user.update({
         where: {id: userId},
@@ -87,6 +99,8 @@ const validaUserNome = async (name: string) => {
     const nameUser = await prisma.user.findMany({
         where: { colaborador: name },
     });
+
+    return nameUser
     
     if(nameUser.length > 0){
         throw new AppError("Usuário já cadastrado na base de dados.", 401);

@@ -34,9 +34,8 @@ export async function getUsers( req: Request, res:Response, next:NextFunction){
       res.status(200).json(users)  
     }).catch ((e) => {  
       res.status(e.statusCode).json({message: e.message})
-    next(e)
-  
-  })
+      next(e)  
+    })
 }
 
 export async function getUser( req: Request, res:Response, next:NextFunction){  
